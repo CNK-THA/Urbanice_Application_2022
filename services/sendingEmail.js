@@ -35,7 +35,8 @@ function sendEmail(requestData) {
     path: '/v3/smtp/email',
     method: 'POST',
     headers: {
-      'api-key':CONFIG.EMAIL_SERVICE_API_KEY,
+      // 'api-key':CONFIG.EMAIL_SERVICE_API_KEY,
+      'api-key':process.env.EMAIL_SERVICE_API_KEY,
       'Content-Type': 'application/json',
       'Content-Length': data.length,
     },

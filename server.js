@@ -6,7 +6,7 @@
  * Last Modified: 17/07/22
  * Editor: Chanon Kachornvuthidej, chanon.kachorn@gmail.com
  */
-const CONFIG = require('./../config.json');
+const CONFIG = require('./config.json');
 const service = require('./services/sendingEmail.js')
 var express = require('express');
 var { expressjwt: jwt} = require('express-jwt');
@@ -21,12 +21,15 @@ var jwtCheck = jwt({
     cache: true,
     rateLimit: true,
     jwksRequestsPerMinute: 5,
-    jwksUri: CONFIG.AUTHENTICATION_DOMAIN
+    // jwksUri: CONFIG.AUTHENTICATION_DOMAIN
+    jwksUri: process.env.AUTHENTICATION_DOMAIN
   }),
 
   // Validate the audience and the issuer.
-  audience: CONFIG.API_IDENTIFIER,
-  issuer: CONFIG.ISSUER,
+  // audience: CONFIG.API_IDENTIFIER,
+  audience: process.env.API_IDENTIFIER,
+  // issuer: CONFIG.ISSUER,
+  issuer: process.env.ISSUER,
   algorithms: ['RS256']
 });
 app.use(jwtCheck);
@@ -44,7 +47,8 @@ app.post('/sendEmail', function (req, res) {
     
   })
 
-var server = app.listen(8081, function () {
+// var server = app.listen(8081, function () {
+  var server = app.listen(process.env.PORT, function () {
   var host = server.address().address
   var port = server.address().port
   console.log("Application running at http://%s:%s", host, port)
