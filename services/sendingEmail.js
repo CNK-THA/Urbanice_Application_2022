@@ -5,7 +5,7 @@
  * Last Modified: 17/07/22
  * Editor: Chanon Kachornvuthidej, chanon.kachorn@gmail.com
  */
-const CONFIG = require('./../../config.json');
+const CONFIG = require(__dirname + '/../config.json');
 const https = require('https');
 const { request } = require('http');
 
