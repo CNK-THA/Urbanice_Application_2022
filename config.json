@@ -1,3 +1,6 @@
 {
-    "EMAIL_SERVICE_API_KEY": "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"
+    "EMAIL_SERVICE_API_KEY": "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",
+    "AUTHENTICATION_DOMAIN": "https://dev-n-4wpn6g.us.auth0.com/.well-known/jwks.json",
+    "API_IDENTIFIER": "urbanice-authorisation",
+    "ISSUER": "https://dev-n-4wpn6g.us.auth0.com/"
 }
