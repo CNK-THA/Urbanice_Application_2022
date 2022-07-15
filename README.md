@@ -8,7 +8,7 @@ Sets of test cases were conducted to verify the functionalities. Due to time con
 Task 1:
 - Implemented with Node.js
 - SendInBlue service (note that there may be delays in email received due to Free plan)
-- Jwt token authorisation with Auth0
+- Jwt token authorisation with Auth0 (Note that for simplicity, Task 1 and 2 will share the same token)
 
 | Task 1 - Test Cases | Result  |  |
 | :---:   | :-: | :-: |
@@ -33,6 +33,7 @@ Task 2:
     - Add contacts: Must have a unique displayname(firstname)
     - Edit contacts: Modify/add contact details
     - List contacts: Retrieve all contacts in JSON format
+    - Jwt token validation
 
 - Further improvements: deletion of contacts, saving image (base64), additional contact parameters, contact ordering
 
@@ -46,6 +47,7 @@ Task 2:
 | Correctly modify existing contact | PASS
 | Correctly remove existing contact | N/A
 | Error message for removing contact that doesn't exist | N/A
+| Error message for performing operations without valid token (add/list/edit) | PASS
 
 
 Task 3:

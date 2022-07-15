@@ -6,11 +6,30 @@
  */
 var express = require('express');
 var app = express();
+const CONFIG = require('./../config.json');
 const getContactService = require('./services/getContacts.js');
 const addContactService = require('./services/addContact.js');
 const modifyContactService = require('./services/modifyContact.js');
+var { expressjwt: jwt} = require('express-jwt');
+var jwks = require('jwks-rsa');
 
 app.use(express.json());
+
+// Perform a jwt token check for incoming POST request header with Auth0 server.
+var jwtCheck = jwt({
+    secret: jwks.expressJwtSecret({
+      cache: true,
+      rateLimit: true,
+      jwksRequestsPerMinute: 5,
+      jwksUri: CONFIG.AUTHENTICATION_DOMAIN
+    }),
+  
+    // Validate the audience and the issuer.
+    audience: CONFIG.API_IDENTIFIER,
+    issuer: CONFIG.ISSUER,
+    algorithms: ['RS256']
+  });
+  app.use(jwtCheck);
 
 app.get('/listContacts', function (req, res) {
     var data;
