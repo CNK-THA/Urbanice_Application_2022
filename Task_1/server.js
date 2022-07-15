@@ -1,28 +1,45 @@
 //Alternatively can use Axios
 const https = require('https');
+const CONFIG = require('./../config.json');
 
-const data = JSON.stringify({
+var express = require('express');
+var app = express();
+app.use(express.json());
+
+
+app.post('/sendEmail', function (req, res) {
+    console.log(req.body);
+    sendEmail(req.body);
+    res.send()
+  })
+
+function sendEmail(requestData) {
+  // console.log(requestData + "TTTTTTTTTTTT")
+  const data = JSON.stringify({
     sender: {  
-        "name":"Sender Alex",
-        "email":"senderalex@example.com"
+        // "name":requestData.from,
+        "email":requestData.from
      },
      "to":[  
         {  
-           "email":"chanon.kachorn@gmail.com",
-           "name":"John Doe"
+           "email":requestData.to,
+          //  "name":requestData.to
         }
      ],
-     "subject":"Hello world",
-     "htmlContent":"<html><head></head><body><p>Hello,</p>This is my first transactional email sent from Sendinblue.</p></body></html>"
+     "subject":"Test Message Task_1 Urbanice",
+     "htmlContent": requestData.message
+    //  "htmlContent":"<html><head></head><body><p>Hello,</p>This is my first transactional email sent from Sendinblue.</p></body></html>"
 });
+
+console.log(data)
 
 const options = {
   hostname: 'api.sendinblue.com',
-//   port: 443,
+  //   port: 443,
   path: '/v3/smtp/email',
   method: 'POST',
   headers: {
-    'api-key':<API_KEY_HERE>,
+    'api-key':CONFIG.EMAIL_SERVICE_API_KEY,
     'Content-Type': 'application/json',
     'Content-Length': data.length,
   },
@@ -42,12 +59,11 @@ req.on('error', error => {
 
 req.write(data);
 req.end();
+}
 
 
-
-app.post('/sendEmail', function (req, res) {
-    console.log(req.body);
-    taxToPay = taxCalculation(req.body.netIncome);
-    console.log("tax to pay" + taxToPay);
-    res.send({personalIncomeTax: taxToPay})
-  })
+var server = app.listen(8081, function () {
+  var host = server.address().address
+  var port = server.address().port
+  console.log("Application running at http://%s:%s", host, port)
+})
