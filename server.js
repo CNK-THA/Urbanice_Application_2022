@@ -6,7 +6,7 @@
  * Last Modified: 17/07/22
  * Editor: Chanon Kachornvuthidej, chanon.kachorn@gmail.com
  */
-const CONFIG = require(__dirname + '/config.json');
+// const CONFIG = require(__dirname + '/config.json');
 const service = require(__dirname + '/services/sendingEmail.js')
 var express = require('express');
 var { expressjwt: jwt} = require('express-jwt');
