@@ -1,66 +1,48 @@
-//Alternatively can use Axios
-const https = require('https');
+/**
+ * Provides an API to sending an email address to specified recipient
+ * with Jwt token validation - Task 1
+ * 
+ * Created: 15/07/22
+ * Last Modified: 17/07/22
+ * Editor: Chanon Kachornvuthidej, chanon.kachorn@gmail.com
+ */
 const CONFIG = require('./../config.json');
-
+const service = require('./services/sendingEmail.js')
 var express = require('express');
+var { expressjwt: jwt} = require('express-jwt');
+var jwks = require('jwks-rsa');
+
 var app = express();
 app.use(express.json());
 
+// Perform a jwt token check for incoming POST request header with Auth0 server.
+var jwtCheck = jwt({
+  secret: jwks.expressJwtSecret({
+    cache: true,
+    rateLimit: true,
+    jwksRequestsPerMinute: 5,
+    jwksUri: CONFIG.AUTHENTICATION_DOMAIN
+  }),
+
+  // Validate the audience and the issuer.
+  audience: CONFIG.API_IDENTIFIER,
+  issuer: CONFIG.ISSUER,
+  algorithms: ['RS256']
+});
+app.use(jwtCheck);
 
 app.post('/sendEmail', function (req, res) {
-    console.log(req.body);
-    sendEmail(req.body);
-    res.send()
+  try{
+    service.checkParameters(req.body);
+  } catch(err){
+    res.status(400);
+    res.send(err.message);
+    return;
+  }
+  service.sendEmail(req.body);
+  res.send("Success");
+    
   })
-
-function sendEmail(requestData) {
-  // console.log(requestData + "TTTTTTTTTTTT")
-  const data = JSON.stringify({
-    sender: {  
-        // "name":requestData.from,
-        "email":requestData.from
-     },
-     "to":[  
-        {  
-           "email":requestData.to,
-          //  "name":requestData.to
-        }
-     ],
-     "subject":"Test Message Task_1 Urbanice",
-     "htmlContent": requestData.message
-    //  "htmlContent":"<html><head></head><body><p>Hello,</p>This is my first transactional email sent from Sendinblue.</p></body></html>"
-});
-
-console.log(data)
-
-const options = {
-  hostname: 'api.sendinblue.com',
-  //   port: 443,
-  path: '/v3/smtp/email',
-  method: 'POST',
-  headers: {
-    'api-key':CONFIG.EMAIL_SERVICE_API_KEY,
-    'Content-Type': 'application/json',
-    'Content-Length': data.length,
-  },
-};
-
-const req = https.request(options, res => {
-  console.log(`statusCode: ${res.statusCode}`);
-
-  res.on('data', d => {
-    process.stdout.write(d);
-  });
-});
-
-req.on('error', error => {
-  console.error(error);
-});
-
-req.write(data);
-req.end();
-}
-
 
 var server = app.listen(8081, function () {
   var host = server.address().address

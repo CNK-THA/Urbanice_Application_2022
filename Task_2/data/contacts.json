@@ -1,0 +1,22 @@
+{
+    "Family": {
+        "Dad": {
+            "Lastname": null,
+            "Birthdate": null
+        },
+        "Mum": {
+            "LastName": "Samson"
+        },
+        "Son": {
+            "LastName": "Johnson"
+        }
+    },
+    "Colleague": {
+        "Boss": {
+            "LastName": "Peterson"
+        },
+        "Accounting": {
+            "LastName": "Kate"
+        }
+    }
+}
