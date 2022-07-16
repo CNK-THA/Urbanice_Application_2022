@@ -2,7 +2,7 @@
 
 ### Important!
 - Task 1 is deployed on Heroku using free plan. There may be delays in response/timeout on the first request due to dynos being put on sleep mode. Subsequent requests should received a success response.
-- To run each task locally, cd into each task's folder and run npm start. (You may be required to use the provided .env file for testing)
+- To run each task locally, cd into each task's folder and run npm start. (You may be required to copy the provided .env file into each task's folder before running to setup the environment variables)
 
 Sets of test cases were conducted to verify the functionalities. This is conducted via postman modifying the request body as appropriate. Some test cases were outside the scope of the task however is documented below for demonstration purpose.
 
