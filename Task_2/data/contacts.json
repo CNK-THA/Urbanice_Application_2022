@@ -1,11 +1,12 @@
 {
     "Family": {
         "Dad": {
-            "Lastname": null,
-            "Birthdate": null
+            "Lastname": "Mustles"
         },
         "Mum": {
-            "LastName": "Samson"
+            "LastName": "Samson",
+            "DateOfBirth": "14-02-1980",
+            "Phone": "081-234-5678"
         },
         "Son": {
             "LastName": "Johnson"
@@ -13,10 +14,17 @@
     },
     "Colleague": {
         "Boss": {
-            "LastName": "Peterson"
+            "LastName": "Peterson",
+            "DateOfBirth": "14-02-1980",
+            "Phone": "081-234-5678"
         },
         "Accounting": {
             "LastName": "Kate"
+        },
+        "Jason": {
+            "LastName": "Young",
+            "DateOfBirth": "23-07-1983",
+            "Phone": "081-234-5678"
         }
     }
 }

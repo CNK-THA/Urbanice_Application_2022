@@ -6,7 +6,7 @@
  */
 
 const fs = require('fs');
-const getContactService = require('./getContacts.js');
+const getContactService = require(__dirname + '/getContacts.js');
 
 /**
  * Check whether the requested change data existed or not (matching both Group and Name casesensitive).
@@ -24,7 +24,7 @@ function editContact(requestBody) {
     
     //perform update and re-write updated object to file
     dataObject[requestBody.group][requestBody.displayName] = requestBody.userData;
-    fs.writeFile("./data/contacts.json", JSON.stringify(dataObject), function(err) {});
+    fs.writeFile(__dirname + "/../data/contacts.json", JSON.stringify(dataObject), function(err) {});
 }
 
 module.exports = {editContact}

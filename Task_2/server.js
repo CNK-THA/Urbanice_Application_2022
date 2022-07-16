@@ -6,12 +6,13 @@
  */
 var express = require('express');
 var app = express();
-const CONFIG = require('./../config.json');
-const getContactService = require('./services/getContacts.js');
-const addContactService = require('./services/addContact.js');
-const modifyContactService = require('./services/modifyContact.js');
+const getContactService = require(__dirname + '/services/getContacts.js');
+const addContactService = require(__dirname + '/services/addContact.js');
+const modifyContactService = require(__dirname + '/services/modifyContact.js');
 var { expressjwt: jwt} = require('express-jwt');
 var jwks = require('jwks-rsa');
+const dotenv = require('dotenv');
+dotenv.config();
 
 app.use(express.json());
 
@@ -21,12 +22,12 @@ var jwtCheck = jwt({
       cache: true,
       rateLimit: true,
       jwksRequestsPerMinute: 5,
-      jwksUri: CONFIG.AUTHENTICATION_DOMAIN
+      jwksUri: process.env.AUTHENTICATION_DOMAIN
     }),
   
     // Validate the audience and the issuer.
-    audience: CONFIG.API_IDENTIFIER,
-    issuer: CONFIG.ISSUER,
+    audience: process.env.API_IDENTIFIER,
+    issuer: process.env.ISSUER,
     algorithms: ['RS256']
   });
   app.use(jwtCheck);
@@ -42,7 +43,6 @@ app.get('/listContacts', function (req, res) {
     }
     res.send(data);
   })
-
 
 app.post('/addContact', function(req, res) {
     try{
@@ -66,7 +66,7 @@ app.post('/editContact', function(req, res) {
     res.send("SUCCESS");
 })
 
-  var server = app.listen(8081, function () {
+  var server = app.listen(process.env.PORT, function () {
     var host = server.address().address
     var port = server.address().port
     console.log("Application running at http://%s:%s", host, port)

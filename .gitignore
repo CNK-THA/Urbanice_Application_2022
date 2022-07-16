@@ -1,1 +1,6 @@
-config.json
+Task_1/.env
+Task_2/.env
+Task_3/.env
+Task_1/node_modules
+Task_2/node_modules
+Task_3/node_modules

@@ -6,10 +6,10 @@
  */
 
  const fs = require('fs');
- const getContactService = require('./getContacts.js');
+ const getContactService = require(__dirname + '/getContacts.js');
 
 /**
- * Check whether the requested data existed or not (matching both Group and Name casesensitive).
+ * Check whether the requested data existed or not (matching both Group and Name case-sensitive).
  * If exist return error else proceed with addition.
  * 
  * @param {object} requestBody request body sent in POST request
@@ -18,9 +18,8 @@
 function addContact(requestBody) {
     dataObject = JSON.parse(getContactService.getContacts()); // parsed read JSON string to object
 
-    // First check if group exist
     if (dataObject[requestBody.group] !== undefined) {
-        // If group exist check displayName (firstname)
+        // If group exist check displayName (firstname) for duplicate
         if(dataObject[requestBody.group][requestBody.displayName] !== undefined) {
             throw new Error("Data already exist");
         }
@@ -31,7 +30,7 @@ function addContact(requestBody) {
     
     dataObject[requestBody.group][requestBody.displayName] = requestBody.userData;
 
-    fs.writeFile("./data/contacts.json", JSON.stringify(dataObject), function(err) {})
+    fs.writeFile(__dirname + "/../data/contacts.json", JSON.stringify(dataObject), function(err) {})
 }
 
  module.exports = {addContact}

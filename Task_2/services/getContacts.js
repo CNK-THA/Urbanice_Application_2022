@@ -14,7 +14,7 @@ const fs = require('fs');
  * @returns data read from file
  */
 function getContacts() {
-    const data = fs.readFileSync("./data/contacts.json", 'utf8', 'r');
+    const data = fs.readFileSync(__dirname + "/../data/contacts.json", 'utf8', 'r');
     return data;
 }
 

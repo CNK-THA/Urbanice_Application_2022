@@ -1,14 +1,15 @@
 # Urbanice_Application_2022
 
-npm install express
-npm i express-jwt jwks-rsa
+### Important!
+- Task 1 is deployed on Heroku using free plan. There may be delays in response/timeout on the first request due to dynos being put on sleep mode. Subsequent requests should received a success response.
+- To run each task locally, cd into each task's folder and run npm start. (You may be required to use the provided .env file for testing)
 
-Sets of test cases were conducted to verify the functionalities. Due to time constraints, only key features were analysed, the test cases were conducted via postman modifying the request body as appropriate. Some test cases were outside the scope of the task however is documented below for demonstration purpose.
+Sets of test cases were conducted to verify the functionalities. This is conducted via postman modifying the request body as appropriate. Some test cases were outside the scope of the task however is documented below for demonstration purpose.
 
-Task 1:
+## Task 1:
 - Implemented with Node.js
-- SendInBlue service (note that there may be delays in email received due to Free plan)
-- Jwt token authorisation with Auth0 (Note that for simplicity, Task 1 and 2 will share the same token)
+- SendInBlue service (note that there may be delays in email received due to Free plan. __Please check your spam folder__)
+- Jwt token authorisation with Auth0
 
 | Task 1 - Test Cases | Result  |  |
 | :---:   | :-: | :-: |
@@ -23,7 +24,7 @@ Task 1:
 | Successful email sent with valid parameters | PASS
 
 
-Task 2:
+## Task 2:
 - Implemented with Node.js
 - To run locally
 - JSON file is used as database mock up storing data. It is divided into 2 levels (case sensitive):
@@ -50,10 +51,9 @@ Task 2:
 | Error message for performing operations without valid token (add/list/edit) | PASS
 
 
-Task 3:
+## Task 3:
 - Implemented with Node.js
 - To run locally
-- Due to context of the task, no security implementation were required
 - Further improvements: rounding of decimal numbers, additional error handling, input serialisation
 
 | Task 3 - Test Cases | Result  |  |
