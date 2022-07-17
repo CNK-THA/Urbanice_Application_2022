@@ -1,6 +1,9 @@
 /**
  * Provides an API to sending an email address to specified recipient
- * with Jwt token validation - Task 1
+ * with Jwt token validation - Task 1.
+ * 
+ * NOTE: This app is also deployed to Heroku. Please find the provided postman
+ * to test using the live cloud environment. 
  * 
  * Created: 15/07/22
  * Last Modified: 17/07/22
@@ -33,17 +36,17 @@ var jwtCheck = jwt({
 });
 app.use(jwtCheck);
 
+// Begin API router
 app.post('/sendEmail', function (req, res) {
   try{
     service.checkParameters(req.body);
+    service.sendEmail(req.body);
+    res.send("Success");
   } catch(err){
     res.status(400);
     res.send(err.message);
     return;
-  }
-  service.sendEmail(req.body);
-  res.send("Success");
-    
+  }    
   })
 
 var server = app.listen(process.env.PORT, function () {

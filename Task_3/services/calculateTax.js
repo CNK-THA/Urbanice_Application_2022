@@ -1,13 +1,14 @@
 /*
  * Provides logic for calculating tax income. 
+
  * Created: 15/07/22
  * Last modified: 17/07/22
  * Editor: Chanon Kachornvuthidej, chanon.kachorn@gmail.com
  */
 
-
 /**
  * Define tax brackets according to Thai taxation law 2022.
+ * 
  * @param {number} netIncome total income to calculate tax
  * @returns {number} tax to pay 
  */

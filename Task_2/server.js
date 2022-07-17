@@ -32,38 +32,51 @@ var jwtCheck = jwt({
   });
   app.use(jwtCheck);
 
-app.get('/listContacts', function (req, res) {
+  //Begin API routers
+app.get('/listGroups', function (req, res) {
     var data;
     try{
-        data = getContactService.getContacts();
+        data = getContactService.getGroups();
+        res.send(data);
     } catch(err){
         res.status(500);
         res.send(err.message);
         return;
     }
-    res.send(data);
+  })
+
+  app.post('/selectGroup', function (req, res) {
+    var data;
+    try{
+        data = getContactService.getContactsOfGroup(req.body.selectedGroup);
+        res.send(data);
+    } catch(err){
+        res.status(500);
+        res.send(err.message);
+        return;
+    }
   })
 
 app.post('/addContact', function(req, res) {
     try{
         addContactService.addContact(req.body);
+        res.send("SUCCESS");
     } catch(err) {
         res.status(500);
         res.send(err.message);
         return;
     }
-    res.send("SUCCESS");
 })
 
 app.post('/editContact', function(req, res) {
     try{
         modifyContactService.editContact(req.body);
+        res.send("SUCCESS");
     } catch(err) {
         res.status(500);
         res.send(err.message);
         return;
     }
-    res.send("SUCCESS");
 })
 
   var server = app.listen(process.env.PORT, function () {

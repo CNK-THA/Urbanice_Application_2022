@@ -1,10 +1,10 @@
 # Urbanice_Application_2022
 
 ### Important!
-- Task 1 is deployed on Heroku using free plan. There may be delays in response/timeout on the first request due to dynos being put on sleep mode. Subsequent requests should received a success response.
-- To run each task locally, cd into each task's folder and run npm start. (You may be required to copy the provided .env file into each task's folder before running to setup the environment variables)
+- Task 1 is __deployed to Heroku__ using free plan. There may be delays in response/timeout on the first request due to dynos being put on sleep mode. Subsequent requests should received a success response.
+- To run each task locally, cd into each task's folder and run npm install/npm start. (You may be required to copy the provided .env file into each task's folder before running to setup the environment variables)
 
-Sets of test cases were conducted to verify the functionalities. This is conducted via postman modifying the request body as appropriate. Some test cases were outside the scope of the task however is documented below for demonstration purpose.
+Sets of test cases were conducted to verify the main functionalities. This is conducted via postman modifying the request body as appropriate. Due to time constraint some test cases are left outside the scope of the task however is documented below for demonstration purpose.
 
 ## Task 1:
 - Implemented with Node.js

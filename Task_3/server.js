@@ -4,25 +4,25 @@
  * Created: 15/07/22
  * Last Modified: 17/07/22
  * Editor: Chanon Kachornvuthidej, Chanon.kachorn@gmail.com
- */
+*/
+
 var express = require('express');
 var service = require(__dirname + '/services/calculateTax.js');
 var app = express();
 const dotenv = require('dotenv');
 dotenv.config();
-
 app.use(express.json());
 
+// Begin API router
 app.post('/calculateTax', function (req, res) {
-   var taxToPay;
    try{
       taxToPay = service.taxCalculation(req.body.netIncome);
+      res.send({personalIncomeTax: taxToPay})
    } catch(err) {
       res.status(400);
       res.send(err.message);
       return;
    }
-   res.send({personalIncomeTax: taxToPay})
  })
  
  var server = app.listen(process.env.PORT, function () {

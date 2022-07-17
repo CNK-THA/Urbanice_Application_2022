@@ -7,6 +7,7 @@
 
 const fs = require('fs');
 const getContactService = require(__dirname + '/getContacts.js');
+const filePath = "/../data/contacts.json";
 
 /**
  * Check whether the requested change data existed or not (matching both Group and Name casesensitive).
@@ -16,15 +17,15 @@ const getContactService = require(__dirname + '/getContacts.js');
  * @throws exception if data requested to change doesn't exist
  */
 function editContact(requestBody) {
-    dataObject = JSON.parse(getContactService.getContacts()); // parsed read JSON string to object
+    allDataObject = getContactService.getAllContacts(); // parsed read JSON string to object
 
-    if (dataObject[requestBody.group][requestBody.displayName] === undefined) {
+    if (allDataObject[requestBody.group][requestBody.displayName] === undefined) {
         throw new Error("Data not found");
     }
     
     //perform update and re-write updated object to file
-    dataObject[requestBody.group][requestBody.displayName] = requestBody.userData;
-    fs.writeFile(__dirname + "/../data/contacts.json", JSON.stringify(dataObject), function(err) {});
+    allDataObject[requestBody.group][requestBody.displayName] = requestBody.userData;
+    fs.writeFile(__dirname + filePath, JSON.stringify(allDataObject), function(err) {});
 }
 
 module.exports = {editContact}

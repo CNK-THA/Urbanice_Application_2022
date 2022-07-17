@@ -9,7 +9,6 @@
 const https = require('https');
 const { request } = require('http');
 
-
 /**
  * Invoke external POST API call to SendInBlue server to send email to recipient.
  * 
